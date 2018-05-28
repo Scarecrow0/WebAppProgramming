@@ -22,10 +22,10 @@ public class DBAction {
                 查询结果以行进行迭代每次调用next取一行 再用get方法get出来
                 这行处理完成之后使用next取下一行 使用isLast判断是否到达最后一个
              */
-            while (!resultSet.isLast()) {
-                resultSet.next();
-                System.out.println(resultSet.getString(1));
-            }
+//            while (!resultSet.isLast()) {
+//                resultSet.next();
+//                System.out.println(resultSet.getString(1));
+//            }
 
         } catch (Exception ee) {
             ee.printStackTrace();

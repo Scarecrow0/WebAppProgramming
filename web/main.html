@@ -5,7 +5,7 @@
     <!-- Basic Page Needs
   ================================================== -->
     <meta charset="utf-8"/>
-    <title>hhh book store</title>
+    <title>红红火火何厚铧旧书店</title>
     <meta name="robots" content="index, follow"/>
     <meta name="keywords" content=""/>
     <meta name="description" content=""/>
@@ -29,6 +29,14 @@
 
 </head>
 <body>
+
+<script>
+    $(function () {
+        $.post("http://127.0.0.1:8080/main", add_item_to_list);
+    });
+</script>
+
+
 <div id="outerheader">
     <header>
         <div id="top">
@@ -56,18 +64,18 @@
             <div class="container">
                 <div class="row">
                     <div id="logo" class="six columns">
-                        <a href="index.html"><img src="images/logo.png" alt=""/></a>
-                        <span class="desc">hhhaass</span>
+                        <a href="http://127.0.0.1:8080/main"><img src="images/logo.png" alt=""/></a>
+                        <span class="desc"><font size="2"> 欢迎光临红红火火何厚铧旧书店 </font></span>
                     </div>
                     <div class="right six columns">
                         <div class="clear"></div>
                         <font size="2">
-                            <div class="login">Welcome Visitor, you can
+                            <div class="login">欢迎，请
                                 <a href="http://127.0.0.1:8080/login">
-                                    <font size="4"> <strong>login</strong> </font>
-                                </a> or
+                                    <font size="4"> <strong>登录</strong> </font>
+                                </a> 或
                                 <a href="http://127.0.0.1:8080/register">
-                                    <font size="4"> <strong>create an account</strong> </font>
+                                    <font size="4"> <strong>注册</strong> </font>
                                 </a>
                             </div>
                         </font>
@@ -78,6 +86,69 @@
         <div class="clear"></div>
     </header>
 </div>
+
+
+<div id="outermain">
+    <div class="container">
+        <div class="row">
+
+            <section id="maincontent" class="ten columns positionleft">
+                <div class="padcontent">
+
+                    <section class="content">
+
+                        <div class="breadcrumb"><a href="index.html">主页</a> / 书籍列表</div>
+                        <h1 class="pagetitle">当前上架书籍</h1>
+
+                        <div class="sortPagiBar">
+                            <form action="index.html" class="productsSortForm">
+                                <p class="select">
+                                    <label>Sort by</label>
+                                    <select>
+                                        <option selected="selected" value="position:asc">Default</option>
+                                        <option value="price:asc">Price: lowest first</option>
+                                        <option value="price:desc">Price: highest first</option>
+                                        <option value="name:asc">Product Name: A to Z</option>
+                                        <option value="name:desc">Product Name: Z to A</option>
+                                        <option value="quantity:desc">In-stock first</option>
+                                    </select>
+                                </p>
+                            </form>
+
+
+                        </div>
+
+                        <div class="row">
+                            <div id="product-list-container">
+
+                                <script>
+                                    function add_item_to_list(json_data) {
+                                        var json_obj = JSON.parse(json_data);
+                                        $.each(json_obj, function (n, value) {
+                                            $("#product-list-container").append(value.toString());
+
+                                        });
+                                    }
+                                </script>
+
+                            </div>
+                        </div>
+                        <div class="wp-pagenavi">
+                            <a href="#" class="page">1</a><span class="current"><span>2</span></span><a href="#"
+                                                                                                        class="page">3</a>
+                            &nbsp;&nbsp;Showing 4 to 4 of 12 (3 Pages)
+                        </div>
+
+                    </section>
+
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+<!-- END MAIN CONTENT -->
+
 
 
 </body>
