@@ -1,0 +1,83 @@
+<html dir="ltr">
+<head>
+
+    <!-- Basic Page Needs
+  ================================================== -->
+    <meta charset="utf-8"/>
+    <title>hhh book store</title>
+    <meta name="robots" content="index, follow"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <!-- Mobile Specific Metas
+  ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+    <!-- CSS
+  ================================================== -->
+    <link href='http://fonts.useso.com/css?family=Ubuntu:400,700,500,300,400italic,300italic' rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="styles/style.css"/>
+    <link rel="stylesheet" href="styles/inner.css"/>
+    <link rel="stylesheet" href="styles/layout.css"/>
+    <link rel="stylesheet" href="styles/color.css"/>
+    <link rel="stylesheet" href="styles/prettyPhoto.css" media="screen"/>
+
+    <script src="js/jquery-1.7.1.min.js"></script>
+
+</head>
+<body contenteditable="false">
+<div class="one_half columns">
+
+    <form method="post" action="" id="register_form">
+        <fieldset>
+            <label contenteditable="false">用户名 </label><br/>
+            <input id="username_input" type="text"/><br/>
+
+            <label contenteditable="false">密码</label><br/>
+            <input id="password_first" type="text" class="text-input"/><br/>
+
+            <label contenteditable="false">确认密码</label><br/>
+            <input id="password_second" type="text" class="text-input"/><br/>
+
+            <input contenteditable="false" type="button" class="button" value="注册" onclick="doPost()"/>
+        </fieldset>
+
+        <SCRIPT>
+            function doPost() {
+                var username = $("#username_input").val().trim();
+                var password = $("#password_first").val().trim();
+                var password_comf = $("#password_second").val().trim();
+
+                if (username === "" || password === "") {
+                    alert("用户名密码不能为空");
+                    return;
+                }
+
+                if (password !== password_comf) {
+                    alert("两次输入密码不一致");
+                } else {
+                    var form = {
+                        "username": username.valueOf(),
+                        "password": password.valueOf()
+                    };
+                    $.post("http://127.0.0.1:8080/register", form, register_call_back)
+                }
+
+            }
+
+            function register_call_back(data, status, xhr) {
+                data = "" + data;
+                if (data === "ok")
+                    window.location.replace("http://127.0.0.1:8080");
+                else
+                    alert("用户名已存在")
+            }
+        </SCRIPT>
+    </form>
+    <br>
+    <a href="#">Forgot your password?</a>
+</div>
+</body>
+</html>
