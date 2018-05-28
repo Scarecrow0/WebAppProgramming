@@ -43,12 +43,14 @@
         </fieldset>
 
         <script>
+
+            var username;
             function register_jump() {
                 window.location.replace("http://127.0.0.1:8080/register")
             }
 
             function login() {
-                var username = $("#username").val().trim();
+                username = $("#username").val().trim();
                 var password = $("#password").val().trim();
 
 
@@ -65,10 +67,16 @@
 
             function login_callback(data) {
                 data = "" + data;
-                if (data === "ok")
+                if (data === "ok") {
                     window.location.replace("http://127.0.0.1:8080/main");
-                else
+                    window.curr_user = username;
+                }
+
+                else {
+                    window.curr_user = username;
                     alert("用户名或密码错误");
+                }
+
 
             }
 

@@ -33,6 +33,7 @@
 <script>
     $(function () {
         $.post("http://127.0.0.1:8080/main", add_item_to_list);
+
     });
 </script>
 
@@ -70,7 +71,7 @@
                     <div class="right six columns">
                         <div class="clear"></div>
                         <font size="2">
-                            <div class="login">欢迎，请
+                            <div id="login_state" class="login">欢迎，请
                                 <a href="http://127.0.0.1:8080/login">
                                     <font size="4"> <strong>登录</strong> </font>
                                 </a> 或
@@ -78,6 +79,12 @@
                                     <font size="4"> <strong>注册</strong> </font>
                                 </a>
                             </div>
+
+                            <script>
+                                function switch_to_login_state() {
+                                    $("#login_state").text("当前用户：" + window.curr_user);
+                                }
+                            </script>
                         </font>
                     </div>
                 </div>

@@ -25,11 +25,11 @@ public class MainPage extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         try {
+            String curr_user = req.getParameter("curr_user");
+
             OutputStream outputStream = resp.getOutputStream();
             ResultSet resultSet = DBAction.getInstance()
                     .doQuery("select * from books ");
-
-
             File templete_file = new File("/home/scarecrow/IdeaProjects/WebAppProgramming/web/list_item_template.html");
             FileInputStream inputStream = new FileInputStream(templete_file);
             String list_item_template = new String(inputStream.readAllBytes());
@@ -43,8 +43,6 @@ public class MainPage extends HttpServlet {
                 temp = String.format(temp, book_id, book.book_name, book.comment_info, book.date, book.price);
                 books.add(temp);
             }
-
-
             Gson gson = new Gson();
             String json_res = gson.toJson(books.toArray());
             System.out.println(json_res);
