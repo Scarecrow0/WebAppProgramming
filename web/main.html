@@ -33,7 +33,6 @@
 <script>
     $(function () {
         $.post("http://127.0.0.1:8080/main", add_item_to_list);
-
     });
 </script>
 
@@ -81,8 +80,8 @@
                             </div>
 
                             <script>
-                                function switch_to_login_state() {
-                                    $("#login_state").text("当前用户：" + window.curr_user);
+                                function switch_to_login_state(username) {
+                                    $("#login_state").text("当前用户：" + username);
                                 }
                             </script>
                         </font>
@@ -131,10 +130,18 @@
                                 <script>
                                     function add_item_to_list(json_data) {
                                         var json_obj = JSON.parse(json_data);
-                                        $.each(json_obj, function (n, value) {
-                                            $("#product-list-container").append(value.toString());
 
+                                        var books = json_obj.booklist;
+                                        var curr_user = json_obj.curr_user;
+
+                                        $.each(books, function (n, value) {
+                                            $("#product-list-container").append(value.toString());
                                         });
+                                        if (curr_user !== undefined) {
+                                            switch_to_login_state(curr_user)
+                                        }
+
+
                                     }
                                 </script>
 

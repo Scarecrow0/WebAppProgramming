@@ -4,6 +4,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.io.OutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainPage extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,8 +27,9 @@ public class MainPage extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         try {
-            String curr_user = req.getParameter("curr_user");
+            HttpSession session = req.getSession();
 
+            String curr_user = (String) session.getAttribute("username");
             OutputStream outputStream = resp.getOutputStream();
             ResultSet resultSet = DBAction.getInstance()
                     .doQuery("select * from books ");
@@ -43,8 +46,11 @@ public class MainPage extends HttpServlet {
                 temp = String.format(temp, book_id, book.book_name, book.comment_info, book.date, book.price);
                 books.add(temp);
             }
+
+            ResponseBody responseBody = new ResponseBody(books, session);
             Gson gson = new Gson();
-            String json_res = gson.toJson(books.toArray());
+            String json_res = gson.toJson(responseBody);
+
             System.out.println(json_res);
             outputStream.write(json_res.getBytes());
             outputStream.close();
@@ -71,6 +77,17 @@ class Book {
         price = resultSet.getFloat(4);
         date = resultSet.getString(5);
         comment_info = resultSet.getString(6);
+    }
+}
+
+
+class ResponseBody {
+    Object[] booklist;
+    String curr_user;
+
+    public ResponseBody(List<String> books, HttpSession session) {
+        this.booklist = books.toArray();
+        curr_user = (String) session.getAttribute("curr_user");
     }
 
 }
