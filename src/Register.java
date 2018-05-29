@@ -2,6 +2,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,7 +13,7 @@ public class Register extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=uft-8");
-        File file = new File("/home/scarecrow/IdeaProjects/WebAppProgramming/web/register.html");
+        File file = new File("/home/scarecrow/IdeaProjects/WebAppProgramming/web/register1.html");
         FileInputStream inputStream = new FileInputStream(file);
         OutputStream writer = resp.getOutputStream();
         writer.write(inputStream.readAllBytes());
@@ -23,6 +24,12 @@ public class Register extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username"),
                 password = req.getParameter("password");
+
+        HttpSession session = req.getSession();
+        if (session.isNew())
+            session.invalidate();
+
+
         System.out.println(username);
         System.out.println(password);
         try {
