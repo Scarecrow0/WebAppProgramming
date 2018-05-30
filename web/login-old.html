@@ -1,0 +1,97 @@
+<html dir="ltr">
+<head>
+
+    <!-- Basic Page Needs
+  ================================================== -->
+    <meta charset="utf-8"/>
+    <title>登录</title>
+    <meta name="robots" content="index, follow"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <!-- Mobile Specific Metas
+  ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+    <!-- CSS
+  ================================================== -->
+    <link href='http://fonts.useso.com/css?family=Ubuntu:400,700,500,300,400italic,300italic' rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="styles/style.css"/>
+    <link rel="stylesheet" href="styles/inner.css"/>
+    <link rel="stylesheet" href="styles/layout.css"/>
+    <link rel="stylesheet" href="styles/color.css"/>
+    <link rel="stylesheet" href="styles/prettyPhoto.css" media="screen"/>
+
+    <script src="js/jquery-1.7.1.min.js"></script>
+
+</head>
+
+<body contenteditable="false"
+      align="center">
+
+
+<div class="common_top">
+    <div class="Narrow">
+        <div class=" left logo"><a href="#"><img src="images/logo.png"/></a></div>
+        <!--电话图层-->
+        <div class="phone"><label>订书热线：</label><em>400-666-6666</em></div>
+    </div>
+</div>
+
+
+<div class="one_half columns">
+    <form method="post" action="" id="login_form">
+        <fieldset>
+            <label>用户名</label><br/>
+            <input type="text" id="username"/><br/>
+            <label>密码</label><br/>
+            <input type="text" id="password" class="text-input"/><br/>
+
+            <input type="button" class="button" value="登录" onclick="login()"/>
+            <input type="button" class="button" value="注册" onclick="register_jump()"/>
+        </fieldset>
+
+        <script>
+
+            var username;
+            function register_jump() {
+                window.location.replace("http://127.0.0.1:8080/register")
+            }
+
+            function login() {
+                username = $("#username").val().trim();
+                var password = $("#password").val().trim();
+
+
+                if (username === "" || password === "") {
+                    alert("用户名密码不能为空");
+                    return;
+                }
+                var form = {
+                    "username": username.valueOf(),
+                    "password": password.valueOf()
+                };
+                $.post("http://127.0.0.1:8080/login", form, login_callback)
+            }
+
+            function login_callback(data) {
+                data = "" + data;
+                if (data === "ok") {
+                    window.location.replace("http://127.0.0.1:8080/main");
+                }
+                else {
+                    alert("用户名或密码错误");
+                }
+
+
+            }
+
+        </script>
+    </form>
+
+
+</div>
+</body>
+</html>

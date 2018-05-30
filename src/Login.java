@@ -13,7 +13,7 @@ public class Login extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=uft-8");
-        File file = new File("/home/scarecrow/IdeaProjects/WebAppProgramming/web/login1.html");
+        File file = new File("/home/scarecrow/IdeaProjects/WebAppProgramming/web/login.html");
         FileInputStream inputStream = new FileInputStream(file);
         OutputStream writer = resp.getOutputStream();
         writer.write(inputStream.readAllBytes());

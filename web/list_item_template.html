@@ -1,12 +1,13 @@
 <div class="product-list-wrapper">
     <div class="one_fifth columns product-img">
-        <a title="Woman's Dress Flower" href="product-details.html"><img src="images/content/products/%s.jpg"
-                                                                         alt=""/></a>
+        <a href="javascript:page_jump()">
+            <img src="images/content/products/%s.jpg" alt=""/>
+        </a>
     </div>
     <div class="three_fifth columns">
         <div class="status"><span>New</span> &nbsp;&nbsp;| &nbsp;&nbsp;Available</div>
-        <h3><a title="Woman's Dress Flower" href="product-details.html">%s</a></h3>
-        <p id="item_info">%s</p>
+        <h3><a href="javascript:page_jump()">%s</a></h3>
+        <p id="item_info" visibilty="false">%s</p>
         <p id="add_date">%s</p>
     </div>
     <div class="one_fifth columns">
@@ -20,5 +21,18 @@
         </div>
     </div>
 
-    <div class="clear"></div>
-</div>>
+
+    <div class="clear">
+        <p id="book-id"> %s </p>
+        <script>
+            function page_jump() {
+                window.location.href = "http://127.0.0.1:8080/book_detail";
+                var book_id = $("#book-id").val();
+                alert(book_id);
+                window.init_book_detail_page(book_id);
+            }
+        </script>
+    </div>
+
+
+</div>

@@ -43,11 +43,12 @@ public class MainPage extends HttpServlet {
                 Book book = new Book(resultSet);
                 String temp = new String(list_item_template.getBytes());
                 String book_id = "book" + book.book_id;
-                temp = String.format(temp, book_id, book.book_name, book.comment_info, book.date, book.price);
+                temp = String.format(temp,
+                        book_id, book.book_name, book.comment_info, book.date, book.price, book.book_id + "");
                 books.add(temp);
             }
 
-            ResponseBody responseBody = new ResponseBody(books, session);
+            ResponseBody responseBody = new BookListResponseBody(books, session);
             Gson gson = new Gson();
             String json_res = gson.toJson(responseBody);
 
@@ -81,11 +82,11 @@ class Book {
 }
 
 
-class ResponseBody {
+class BookListResponseBody extends ResponseBody {
     Object[] booklist;
-    String curr_user;
 
-    public ResponseBody(List<String> books, HttpSession session) {
+    public BookListResponseBody(List<String> books, HttpSession session) {
+        super(session);
         this.booklist = books.toArray();
         curr_user = (String) session.getAttribute("curr_user");
     }

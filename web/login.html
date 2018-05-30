@@ -1,37 +1,16 @@
-<html dir="ltr">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-
-    <!-- Basic Page Needs
-  ================================================== -->
-    <meta charset="utf-8"/>
-    <title>登录</title>
-    <meta name="robots" content="index, follow"/>
-    <meta name="keywords" content=""/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
-
-    <!-- Mobile Specific Metas
-  ================================================== -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-    <!-- CSS
-  ================================================== -->
-    <link href='http://fonts.useso.com/css?family=Ubuntu:400,700,500,300,400italic,300italic' rel='stylesheet'
-          type='text/css'>
-    <link rel="stylesheet" href="styles/style.css"/>
-    <link rel="stylesheet" href="styles/inner.css"/>
-    <link rel="stylesheet" href="styles/layout.css"/>
-    <link rel="stylesheet" href="styles/color.css"/>
-    <link rel="stylesheet" href="styles/prettyPhoto.css" media="screen"/>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="styles/css.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/common.css" rel="stylesheet" tyle="text/css"/>
+    <title>用户登录</title>
     <script src="js/jquery-1.7.1.min.js"></script>
-
 </head>
 
-<body contenteditable="false"
-      align="center">
-
-
+<body>
+<!--顶部样式-->
 <div class="common_top">
     <div class="Narrow">
         <div class=" left logo"><a href="#"><img src="images/logo.png"/></a></div>
@@ -39,59 +18,90 @@
         <div class="phone"><label>订书热线：</label><em>400-666-6666</em></div>
     </div>
 </div>
+<br><br>
+<div class="login_bg">
+    <div class="login Narrow">
+        <div class="login_advertising"><img src="images/bg_031.png"/></div>
+        <div class="login_frame">
 
+            <div class="login-form">
+                <div class="login-name"><h1 class="name"> 用户登录</h1>
+                    <span class="login_link">
+                        <a href="javascript:register_jump()"> <b></b>用户注册</a>
+                    </span>
+                </div><!--跳转到注册页面-->
 
-<div class="one_half columns">
-    <form method="post" action="" id="login_form">
-        <fieldset>
-            <label>用户名</label><br/>
-            <input type="text" id="username"/><br/>
-            <label>密码</label><br/>
-            <input type="text" id="password" class="text-input"/><br/>
+                <br><br>
+                <!--提示信息-->
+                <div class="form clearfix">
+                    <div class="item item-fore1"><label class="login-label name-label"></label>
+                        <input id="username" type="text" class="text" placeholder="请输入用户名"/><!--用户名输入-->
+                    </div>
+                    <div class="item item-fore2"><label class="login-label pwd-label"></label>
+                        <input id="password" type="password" class="text" placeholder="请输入密码"/><!--密码输入-->
+                    </div>
+                    <br>
+                    <div class="Forgetpass"><a href="#">忘记密码？</a></div>
+                    <br>
+                </div>
+                <div class="login-btn">
+                    <!-- 注册按键 -->
+                    <div class="rgister-btn">
+                        <input contenteditable="false" type="button"
+                               style="width:160px;height:30px;" class="button"
+                               value="登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录" onclick="login()"/>
+                    </div>
+                </div>
+            </div>
 
-            <input type="button" class="button" value="登录" onclick="login()"/>
-            <input type="button" class="button" value="注册" onclick="register_jump()"/>
-        </fieldset>
+            <script>
 
-        <script>
+                var username;
 
-            var username;
-            function register_jump() {
-                window.location.replace("http://127.0.0.1:8080/register")
-            }
-
-            function login() {
-                username = $("#username").val().trim();
-                var password = $("#password").val().trim();
-
-
-                if (username === "" || password === "") {
-                    alert("用户名密码不能为空");
-                    return;
-                }
-                var form = {
-                    "username": username.valueOf(),
-                    "password": password.valueOf()
-                };
-                $.post("http://127.0.0.1:8080/login", form, login_callback)
-            }
-
-            function login_callback(data) {
-                data = "" + data;
-                if (data === "ok") {
-                    window.location.replace("http://127.0.0.1:8080/main");
-                }
-                else {
-                    alert("用户名或密码错误");
+                function register_jump() {
+                    window.location.replace("http://127.0.0.1:8080/register")
                 }
 
-
-            }
-
-        </script>
-    </form>
+                function login() {
+                    username = $("#username").val().trim();
+                    var password = $("#password").val().trim();
 
 
+                    if (username === "" || password === "") {
+                        alert("用户名密码不能为空");
+                        return;
+                    }
+                    var form = {
+                        "username": username.valueOf(),
+                        "password": password.valueOf()
+                    };
+                    $.post("http://127.0.0.1:8080/login", form, login_callback)
+                }
+
+                function login_callback(data) {
+                    data = "" + data;
+                    if (data === "ok") {
+                        window.location.replace("http://127.0.0.1:8080/main");
+                    }
+                    else {
+                        alert("用户名或密码错误");
+                    }
+
+
+                }
+
+            </script>
+
+
+        </div>
+    </div>
+</div>
+<!--底部样式-->
+<div class="bottom_footer">
+    <p><a href="#">关于我们</a> | <a href="#">联系我们</a> | <a href="#">商家入驻</a> | <a href="#">法律申明</a> | <a href="#">友情链接</a>
+    </p>
+    <p>Copyright©2018哈哈哈旧书店.All Rights Reserved. </p>
+    <p>辽ICP备66666666号</p>
 </div>
 </body>
 </html>
