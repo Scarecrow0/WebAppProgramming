@@ -15,6 +15,7 @@ public class BookDetail extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println(req.getRequestURL().toString());
         resp.setContentType("text/html;charset=uft-8");
         File file = new File("/home/scarecrow/IdeaProjects/WebAppProgramming/web/book_detail_page.html");
         FileInputStream inputStream = new FileInputStream(file);
@@ -26,7 +27,6 @@ public class BookDetail extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
         String action = req.getParameter("action");
         Integer book_id = Integer.valueOf(req.getParameter("book_id"));
 
@@ -62,6 +62,7 @@ public class BookDetail extends HttpServlet {
 
                     resp.getOutputStream().write(response_json.getBytes());
                     resp.getOutputStream().close();
+                    System.out.println("show book detail completed");
 
 
                 } catch (Exception ee) {

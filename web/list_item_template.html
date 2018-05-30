@@ -1,15 +1,17 @@
 <div class="product-list-wrapper">
     <div class="one_fifth columns product-img">
-        <a href="javascript:page_jump()">
-            <img src="images/content/products/%s.jpg" alt=""/>
+        <a href="javascript:page_jump('%s')">
+            <img src="images/content/products/book%s.jpg" alt=""/>
         </a>
     </div>
     <div class="three_fifth columns">
         <div class="status"><span>New</span> &nbsp;&nbsp;| &nbsp;&nbsp;Available</div>
-        <h3><a href="javascript:page_jump()">%s</a></h3>
-        <p id="item_info" visibilty="false">%s</p>
+        <h2><a href="javascript:page_jump('%s')">%s</a></h2>
+        <p id="book_id">书籍id %s</p>
+        <p id="item_info">%s</p>
         <p id="add_date">%s</p>
     </div>
+
     <div class="one_fifth columns">
         <div class="price-cart-wrapper">
             <div class="price" id="price"> ￥%s</div>
@@ -20,18 +22,17 @@
             <div class="clear"></div>
         </div>
     </div>
+    <SCRIPT>
+        function page_jump(data) {
+            var book_id = data;
+            window.localStorage.setItem("book_id", book_id);
+            window.location.href = "http://127.0.0.1:8080/book_detail";
+
+        }
+    </SCRIPT>
 
 
     <div class="clear">
-        <p id="book-id"> %s </p>
-        <script>
-            function page_jump() {
-                window.location.href = "http://127.0.0.1:8080/book_detail";
-                var book_id = $("#book-id").val();
-                alert(book_id);
-                window.init_book_detail_page(book_id);
-            }
-        </script>
     </div>
 
 

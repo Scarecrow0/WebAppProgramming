@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>商品详细信息</title>
+    <link href="styles/style_detail.css" rel="stylesheet" type="text/css"/>
+    <script src="js/jquery-3.2.1.min.js">
+    </script>
+</head>
+
+
+<body>
+<script>
+    function init_page() {
+        var book_id = window.localStorage.getItem("book_id");
+        window.localStorage.removeItem("book_id");
+        var action = "show";
+        var form = {
+            "action": action,
+            "book_id": book_id
+        };
+        $.post("http://127.0.0.1:8080/book_detail", form, inflate_data);
+    }
+
+    function inflate_data(data) {
+        var json_obj = JSON.parse(data);
+        inflate_book_info(json_obj['book_detail']);
+        inflate_post_user_info(json_obj['user_info'])
+
+    }
+
+    $(function () {
+        init_page();
+    });
+
+</script>
+
+
+<header>
+    <section class="Topmenubg">
+        <div class="Topnav">
+
+            <!-- -------------左部标题--------------- -->
+            <div class="LeftNav">
+                <a href="http://127.0.0.1:8080/register">注册</a>/<a href="http://127.0.0.1:8080/login">登录</a><a
+                    href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
+            </div>
+
+            <!-- -------------右部标题--------------- -->
+            <div class="RightNav">
+                欢迎光临哈哈哈二手书交易平台！<a href="user_center.html">个人中心</a><a
+                    href="http://127.0.0.1:8080/main">首页</a><a href="http://www.cse.neu.edu.cn">联系我们</a>
+            </div>
+        </div>
+    </section>
+    <div class="Logo_search">
+        <div class="Logo">
+            <img src="images/logo.png"/>
+
+        </div>
+        <div class="Search">
+            <form method="get" id="main_a_serach"
+                  onsubmit="return check_search(this)">
+
+                <!-- -------------搜索--------------- -->
+                <div class="Search_area">
+                    <input type="search" id="fkeyword" name="keyword"
+                           placeholder="请输入您所需查找的书籍名称" class="searchbox"/> <input
+                        type="submit" class="searchbutton" value="搜 索"/>
+                </div>
+            </form>
+            <p class="hotkeywords">
+                <a href="#" title="解忧杂货店">解忧杂货店</a><a href="#" title="明朝那些事儿">明朝那些事儿</a><a
+                    href="#" title="活着">活着</a><a href="#" title="机器学习">机器学习</a><a
+                    href="#" title="数据库系统概论">数据库系统概论</a>
+            </p>
+        </div>
+    </div>
+    <nav class="menu_bg">
+        <ul class="menu">
+        </ul>
+    </nav>
+</header>
+
+<!--Start content-->
+<section class="slp">
+    <section class="food-hd">
+
+        <script>
+            function inflate_book_info(data) {
+                $(".food-hd").prepend(data)
+            }
+        </script>
+
+        <!--    右侧出售人   -->
+        <div class="viewhistory">
+            <span class="VHtitle">出售人</span>
+            <ul class="Fsulist" id="post_user_list">
+
+                <script>
+                    function inflate_post_user_info(data) {
+                        $("#post_user_list").append(data)
+                    }
+                </script>
+            </ul>
+        </div>
+
+
+    </section>
+    <!--bottom content-->
+    <section class="Bcontent">
+        <article>
+            <div class="shopcontent">
+                <div class="title2 cf">
+                    <ul class="title-list fr cf ">
+                        <li class="on">详细说明</li>
+                    </ul>
+                </div>
+                <div class="menutab-wrap">
+                    <!--case1-->
+                    <div class="menutab show">
+                        <div class="cont_padding">
+                            <img src="images/book_detail/MLearning/detail_0.jpg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+    </section>
+</section>
+<!--End content-->
+<footer>
+
+    <div class="copyright">
+        <p>Copyright©2018进击的菜鸟小分队.All Rights Reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

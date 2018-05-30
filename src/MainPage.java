@@ -42,9 +42,9 @@ public class MainPage extends HttpServlet {
             while (resultSet.next()) {
                 Book book = new Book(resultSet);
                 String temp = new String(list_item_template.getBytes());
-                String book_id = "book" + book.book_id;
+                String book_id = String.valueOf(book.book_id);
                 temp = String.format(temp,
-                        book_id, book.book_name, book.comment_info, book.date, book.price, book.book_id + "");
+                        book_id, book_id, book_id, book.book_name, book_id, book.comment_info, book.date, book.price);
                 books.add(temp);
             }
 
