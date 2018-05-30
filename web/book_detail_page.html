@@ -11,6 +11,8 @@
 
 <body>
 <script>
+
+    window.localStorage.setItem("is_login", false);
     function init_page() {
         var book_id = window.localStorage.getItem("book_id");
         window.localStorage.removeItem("book_id");
@@ -48,7 +50,8 @@
                 <script>
                     function update_login_state(curr_user) {
                         if (curr_user !== "" && curr_user !== undefined) {
-                            $("#login_state").replaceWith($("<div><a href=\"http://127.0.0.1:8080/user_info\">" +
+                            window.localStorage.setItem("is_login", true);
+                            $("#login_state").replaceWith($("<div><a href=\"http://127.0.0.1:8080/user_center\">" +
                                 "当前用户：" + curr_user + "<\a></div>"));
                         }
 
@@ -58,7 +61,7 @@
 
             <!-- -------------右部标题--------------- -->
             <div class="RightNav">
-                欢迎光临哈哈哈二手书交易平台！<a href="user_center.html">个人中心</a><a
+                欢迎光临哈哈哈二手书交易平台！<a href="http://127.0.0.1:8080/user_center">个人中心</a><a
                     href="http://127.0.0.1:8080/main">首页</a><a href="http://www.cse.neu.edu.cn">联系我们</a>
             </div>
         </div>

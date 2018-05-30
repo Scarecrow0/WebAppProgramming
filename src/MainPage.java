@@ -32,10 +32,9 @@ public class MainPage extends HttpServlet {
             String curr_user = (String) session.getAttribute("username");
             OutputStream outputStream = resp.getOutputStream();
             ResultSet resultSet = DBAction.getInstance()
-                    .doQuery("select * from books ");
-            File templete_file = new File("/home/scarecrow/IdeaProjects/WebAppProgramming/web/list_item_template.html");
-            FileInputStream inputStream = new FileInputStream(templete_file);
-            String list_item_template = new String(inputStream.readAllBytes());
+                    .doQuery("select * from books where salestate = 'sale' ");
+
+            String list_item_template = ResponseBody.fetchTemplate("list_item");
 
             ArrayList<String> books = new ArrayList<>();
 

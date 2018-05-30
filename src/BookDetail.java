@@ -29,11 +29,11 @@ public class BookDetail extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         Integer book_id = Integer.valueOf(req.getParameter("book_id"));
-
-        switch (action) {
-            case "show":
-                try {
-                    ResultSet resultSet = DBAction.getInstance()
+        ResultSet resultSet;
+        try {
+            switch (action) {
+                case "show":
+                    resultSet = DBAction.getInstance()
                             .doQuery("select * from books where book_id = " + book_id);
                     resultSet.next();
                     Book book = new Book(resultSet);
@@ -41,7 +41,7 @@ public class BookDetail extends HttpServlet {
                     String book_detail_template = ResponseBody.fetchTemplate("book_detail");
                     book_detail_template =
                             String.format(book_detail_template,
-                                    "book" + book.book_id, book.book_name, book.price, book.comment_info);
+                                    "book" + book.book_id, book.book_id + "", book.book_name, book.price, book.comment_info);
 
                     String post_user_detail = ResponseBody.fetchTemplate("post_user_detail");
                     resultSet = DBAction.getInstance()
@@ -60,16 +60,26 @@ public class BookDetail extends HttpServlet {
                     resp.getOutputStream().close();
                     System.out.println("show book detail completed");
 
+                    break;
+                case "buy":
+                    String curr_user = (String) req.getSession().getAttribute("curr_user");
+                    DBAction.getInstance()
+                            .doInsert("update books set salestate='sold' where book_id = " + book_id);
+                    DBAction.getInstance()
+                            .doInsert(String.format("update sell_relation set buy_user=%s where book_id=%d",
+                                    curr_user, book_id));
+                    resp.getOutputStream().write("ok".getBytes());
+                    resp.getOutputStream().close();
+                    System.out.println("buy book completed");
 
-                } catch (Exception ee) {
-                    ee.printStackTrace(System.out);
-                }
-                break;
-            case "buy":
-                break;
-            default:
-                break;
 
+                    break;
+                default:
+                    break;
+
+            }
+        } catch (Exception ee) {
+            ee.printStackTrace(System.out);
         }
     }
 }

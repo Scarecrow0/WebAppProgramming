@@ -44,5 +44,15 @@
         <url-pattern>/book_detail</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>UserCenter</servlet-name>
+        <servlet-class>UserCenter</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserCenter</servlet-name>
+        <url-pattern>/user_center</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

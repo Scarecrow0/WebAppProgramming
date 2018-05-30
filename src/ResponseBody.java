@@ -19,7 +19,8 @@ public abstract class ResponseBody {
 
     static public String fetchTemplate(String template_name) throws IOException {
 
-        File template_file = new File(String.format("/home/scarecrow/IdeaProjects/WebAppProgramming/web/%s_template.html", template_name));
+        File template_file = new File(String
+                .format("/home/scarecrow/IdeaProjects/WebAppProgramming/web/%s_template.html", template_name));
         FileInputStream inputStream = new FileInputStream(template_file);
         return new String(inputStream.readAllBytes());
 

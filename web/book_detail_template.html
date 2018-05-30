@@ -5,7 +5,8 @@
 
 <div class="foodtext">
     <div class="book_detail">
-        <h1>%s</h1>
+        书籍ID<h1 id="book_id">%s</h1>
+        <font size="8">%s</font>
         <p>沈阳市浑南区创新路195号</p>
     </div>
     <div class="price_a">
@@ -23,8 +24,28 @@
 
         <!-- ------ 按键 加入购物车 -------- -->
         <div class="Buybutton">
-            <input name="" type="submit" value="联系出售人" class="BuyB"> <a
-                href="main.html"><span class="Backhome">返回首页</span></a>
+            <input name="" type="submit" value="购买" onclick="buy_action()" class="BuyB">
+            <a href="main.html"><span class="Backhome">返回首页</span></a>
         </div>
     </div>
+
+    <script>
+        function buy_action() {
+            if (window.localStorage.getItem("is_login")) {
+                var form = {
+                    "action": "buy",
+                    "book_id": $("#book_id").text()
+                };
+                $.post("http://127.0.0.1:8080/book_detail", form, function () {
+                    alert("购买成功");
+                });
+            } else {
+                alert("请先登录");
+            }
+
+
+        }
+
+
+    </script>
 </div>

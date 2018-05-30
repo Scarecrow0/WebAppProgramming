@@ -17,19 +17,50 @@
 <body>
 <!--顶部样式-->
 
+<script>
+    $(function () {
+
+        var form = {
+            "action": "show"
+        };
+        $.post("http://127.0.0.1:8080/user_center", form, function (data) {
+            var json_obj = JSON.parse(data);
+            update_login_state(json_obj['curr_user']);
+            add_item_to_list(json_obj['brought_infos']);
+            init_user_info(json_obj);
+
+        });
+    })
+
+</script>
+
+
 <header>
     <section class="Topmenubg">
         <div class="Topnav">
 
             <!-- -------------左部标题--------------- -->
             <div class="LeftNav">
-                <a href="http://127.0.0.1:8080/register">注册</a>/<a href="http://127.0.0.1:8080/login">登录</a><a
-                    href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
+                <div id="login_state">
+                    <a href="http://127.0.0.1:8080/register">注册</a>/<a href="http://127.0.0.1:8080/login">登录</a>
+                </div>
+                <script>
+                    function update_login_state(curr_user) {
+                        if (curr_user !== "" && curr_user !== undefined) {
+                            window.localStorage.setItem("is_login", true);
+                            $("#login_state").replaceWith($("<div><a href=\"http://127.0.0.1:8080/user_center\">" +
+                                "当前用户：" + curr_user + "<\a></div>"));
+
+                            set_user(curr_user)
+                        }
+
+                    }
+                </script>
             </div>
 
             <!-- -------------右部标题--------------- -->
             <div class="RightNav">
-                欢迎光临哈哈哈二手书交易平台！<a href="user_center.html">个人中心</a><a
+                欢迎光临哈哈哈二手书交易平台！<a href="http://127.0.0.1:8080/user_center">个人中心</a><a
                     href="http://127.0.0.1:8080/main">首页</a><a href="http://www.cse.neu.edu.cn">联系我们</a>
             </div>
         </div>
@@ -67,20 +98,12 @@
 <div id="Menu" class="clearfix">
     <div class="Menu_style">
         <!--购物车-->
-
         <div class="hd_Shopping_list" id="Shopping_list">
-            <div class="s_cart"><em></em><a href="#">我的购物车</a> <i class="ci-right">&gt;</i><i class="ci-count"
-                                                                                              id="shopping-amount">0</i>
-            </div>
-            <div class="dorpdown-layer">
-                <div class="spacer"></div>
-                <div class="Shopping_style">
-                    <a href="#" title="去购物车结算" id="btn-payforgoods" class="Shopping">去购物车结算</a>
-                </div>
-            </div>
         </div>
     </div>
 </div>
+
+
 <!--用户中心(地址管理界面)-->
 <div class="user_style clearfix" id="user">
     <div class="user_title"><em></em>用户中心</div>
@@ -88,8 +111,17 @@
         <!--左侧菜单栏样式-->
         <div class="user_left">
             <div class="user_info">
-                <div class="Head_portrait"><img src="images/people.png" width="80px" height="80px"/><!--头像区域--></div>
-                <div class="user_name">贝贝</div>
+                <div>
+                    <img src="images/people.jpg" width="200px" height="200px"/>
+                </div>
+                <div class="clear"></div>
+                <div class="user_name">
+                    <script>
+                        function set_user(user_name) {
+                            $(".user_name").text(user_name)
+                        }
+                    </script>
+                </div>
             </div>
         </div>
 
@@ -105,16 +137,28 @@
                             <ul>
                                 <li class="li">
                                     <label class="user_title_name">用户名：</label>
-                                    <label id="username" class="add_text"> </label>
+                                    <font size="4" color="black">
+                                        <label id="username"></label>
+                                    </font>
                                 </li>
                                 <!--姓名显示-->
 
                                 <li class="li">
                                     <label class="user_title_name">手&nbsp;机&nbsp;号：</label>
-                                    <label id="phone_number" class="add_text"> </label>
+                                    <font size="4" color="black">
+                                        <label id="phone_number"></label>
+                                    </font>
                                 </li>
                                 <!--手机号显示-->
                             </ul>
+
+                            <script>
+                                function init_user_info(json_obj) {
+                                    $("#username").text(json_obj['curr_user']);
+                                    $("#phone_number").text(json_obj['phone_number']);
+                                }
+                            </script>
+
                         </div>
                     </form>
                 </div>
@@ -122,29 +166,26 @@
                 <div class="Address_List">
                     <div class="title_name"><span class="name">购买书籍列表</span></div>
                     <div class="list">
-                        <table>
+                        <table id="bought_books">
                             <thead>
-                            <td class="list_name_title0">书籍</td>
+                            <td class="list_name_title4">书籍名</td>
                             <td class="list_name_title1">价格</td>
-                            <td class="list_name_title4">收货地址</td>
-                            <td class="list_name_title5">操作</td>
+                            <td class="list_name_title1">书籍id</td>
+                            <td class="list_name_title3">出售者</td>
+                            <td class="list_name_title2">操作</td>
                             </thead>
 
-                            <tr>
-                                <td>小王子</td>
-                                <td>25</td>
-                                <td>辽宁省沈阳市浑南新区创新路195号</td>
-                                <td><a href="#">修改</a><a href="#">删除</a></td>
-                            </tr>
-
-
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
                         </table>
+                        <script>
+                            function add_item_to_list(json_data) {
+                                var books = json_data;
+
+                                $.each(books, function (n, value) {
+                                    $("#bought_books").append(value.toString());
+                                });
+                            }
+
+                        </script>
                     </div>
                 </div>
             </div>
