@@ -44,7 +44,8 @@ public class MainPage extends HttpServlet {
                 String temp = new String(list_item_template.getBytes());
                 String book_id = String.valueOf(book.book_id);
                 temp = String.format(temp,
-                        book_id, book_id, book_id, book.book_name, book_id, book.comment_info, book.date, book.price);
+                        book_id, book_id, book_id, book.book_name, book_id,
+                        book.comment_info, book.date, book.price, book_id);
                 books.add(temp);
             }
 

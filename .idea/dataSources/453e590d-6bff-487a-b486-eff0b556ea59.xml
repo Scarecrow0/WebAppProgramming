@@ -110,7 +110,11 @@
       <DataType>varchar(30)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="31" parent="10" name="PRIMARY">
+    <column id="31" parent="10" name="phone_number">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <key id="32" parent="10" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>

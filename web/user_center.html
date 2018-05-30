@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="styles/css.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/common.css" rel="stylesheet" type="text/css"/>
+    <link href="Threelinkage/linkage.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/style_detail.css" rel="stylesheet" type="text/css"/>
+    <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="js/jquery.SuperSlide.2.1.1.js" type="text/javascript"></script>
+    <script src="js/common_js.js" type="text/javascript"></script>
+    <script src="js/jquery.foucs.js" type="text/javascript"></script>
+    <title>用户信息</title>
+</head>
+
+<body>
+<!--顶部样式-->
+
+<header>
+    <section class="Topmenubg">
+        <div class="Topnav">
+
+            <!-- -------------左部标题--------------- -->
+            <div class="LeftNav">
+                <a href="http://127.0.0.1:8080/register">注册</a>/<a href="http://127.0.0.1:8080/login">登录</a><a
+                    href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
+            </div>
+
+            <!-- -------------右部标题--------------- -->
+            <div class="RightNav">
+                欢迎光临哈哈哈二手书交易平台！<a href="user_center.html">个人中心</a><a
+                    href="http://127.0.0.1:8080/main">首页</a><a href="http://www.cse.neu.edu.cn">联系我们</a>
+            </div>
+        </div>
+    </section>
+    <div class="Logo_search">
+        <div class="Logo">
+            <img src="images/logo.png"/>
+
+        </div>
+        <div class="Search">
+            <form method="get" id="main_a_serach"
+                  onsubmit="return check_search(this)">
+
+                <!-- -------------搜索--------------- -->
+                <div class="Search_area">
+                    <input type="search" id="fkeyword" name="keyword"
+                           placeholder="请输入您所需查找的书籍名称" class="searchbox"/> <input
+                        type="submit" class="searchbutton" value="搜 索"/>
+                </div>
+            </form>
+            <p class="hotkeywords">
+                <a href="#" title="解忧杂货店">解忧杂货店</a><a href="#" title="明朝那些事儿">明朝那些事儿</a><a
+                    href="#" title="活着">活着</a><a href="#" title="机器学习">机器学习</a><a
+                    href="#" title="数据库系统概论">数据库系统概论</a>
+            </p>
+        </div>
+    </div>
+    <nav class="menu_bg">
+        <ul class="menu">
+        </ul>
+    </nav>
+</header>
+
+<!--导航栏样式-->
+<div id="Menu" class="clearfix">
+    <div class="Menu_style">
+        <!--购物车-->
+
+        <div class="hd_Shopping_list" id="Shopping_list">
+            <div class="s_cart"><em></em><a href="#">我的购物车</a> <i class="ci-right">&gt;</i><i class="ci-count"
+                                                                                              id="shopping-amount">0</i>
+            </div>
+            <div class="dorpdown-layer">
+                <div class="spacer"></div>
+                <div class="Shopping_style">
+                    <a href="#" title="去购物车结算" id="btn-payforgoods" class="Shopping">去购物车结算</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--用户中心(地址管理界面)-->
+<div class="user_style clearfix" id="user">
+    <div class="user_title"><em></em>用户中心</div>
+    <div class="clearfix user">
+        <!--左侧菜单栏样式-->
+        <div class="user_left">
+            <div class="user_info">
+                <div class="Head_portrait"><img src="images/people.png" width="80px" height="80px"/><!--头像区域--></div>
+                <div class="user_name">贝贝</div>
+            </div>
+        </div>
+
+        <!--右侧内容样式-->
+        <div class="right_style r_user_style">
+            <div class="user_Borders">
+                <div class="title_name">
+                    <span class="name">个人信息</span>
+                </div>
+                <div class="about_user_info">
+                    <form id="form1" name="form1" method="post" action="">
+                        <div class="user_layout">
+                            <ul>
+                                <li class="li">
+                                    <label class="user_title_name">用户名：</label>
+                                    <label id="username" class="add_text"> </label>
+                                </li>
+                                <!--姓名显示-->
+
+                                <li class="li">
+                                    <label class="user_title_name">手&nbsp;机&nbsp;号：</label>
+                                    <label id="phone_number" class="add_text"> </label>
+                                </li>
+                                <!--手机号显示-->
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+                <!--地址列表-->
+                <div class="Address_List">
+                    <div class="title_name"><span class="name">购买书籍列表</span></div>
+                    <div class="list">
+                        <table>
+                            <thead>
+                            <td class="list_name_title0">书籍</td>
+                            <td class="list_name_title1">价格</td>
+                            <td class="list_name_title4">收货地址</td>
+                            <td class="list_name_title5">操作</td>
+                            </thead>
+
+                            <tr>
+                                <td>小王子</td>
+                                <td>25</td>
+                                <td>辽宁省沈阳市浑南新区创新路195号</td>
+                                <td><a href="#">修改</a><a href="#">删除</a></td>
+                            </tr>
+
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footerbox">
+    <!--友情链接-->
+    <div class="Links">
+        <div class="link_title">友情链接</div>
+        <div class="link_address"><a href="#">北方图书城</a> <a href="#">一麻袋书店</a> <a href="#">链接地址</a> <a href="#">链接地址 </a>
+            <a href="#">链接地址</a> <a href="#">链接地址</a> <a href="#">链接地址</a></div>
+    </div>
+</div>
+<!--底部样式-->
+
+<div class="footerbox Copyright">
+    <p><a href="#">关于我们</a> | <a href="#">隐私申明</a> | <a href="#">成为供应商</a> | <a href="#">博客</a> |<a href="#">友情链接</a> |
+        <a href="#">网站地图</a></p>
+    <p>Copyright 2018 哈哈哈旧书店有限公司 zuipin.cn All Rights Reserved </p>
+    <p>辽ICP备66666666号-1</p>
+    <a href="#" class="return_img"></a>
+</div>
+
+
+</body>
+</html>

@@ -5,10 +5,15 @@ import java.io.IOException;
 
 public abstract class ResponseBody {
 
-    String curr_user;
+    String curr_user = null;
 
     public ResponseBody(HttpSession session) {
-        curr_user = (String) session.getAttribute("curr_user");
+        if (!session.isNew())
+            curr_user = (String) session.getAttribute("curr_user");
+
+        if (curr_user == null)
+            curr_user = "";
+
 
     }
 

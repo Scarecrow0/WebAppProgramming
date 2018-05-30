@@ -30,10 +30,6 @@ public class BookDetail extends HttpServlet {
         String action = req.getParameter("action");
         Integer book_id = Integer.valueOf(req.getParameter("book_id"));
 
-        String curr_user;
-        if (!req.getSession().isNew())
-            curr_user = (String) req.getSession().getAttribute("curr_user");
-
         switch (action) {
             case "show":
                 try {
@@ -47,16 +43,16 @@ public class BookDetail extends HttpServlet {
                             String.format(book_detail_template,
                                     "book" + book.book_id, book.book_name, book.price, book.comment_info);
 
-                    String user_detail_temlate = ResponseBody.fetchTemplate("post_user_detail");
+                    String post_user_detail = ResponseBody.fetchTemplate("post_user_detail");
                     resultSet = DBAction.getInstance()
                             .doQuery("select post_user from sell_relation where book_id = " + book_id);
                     resultSet.next();
                     String post_user = resultSet.getString(1);
-                    user_detail_temlate =
-                            String.format(user_detail_temlate, post_user);
+                    post_user_detail =
+                            String.format(post_user_detail, post_user);
 
                     BookDetailResponseBody responseBody =
-                            new BookDetailResponseBody(book_detail_template, user_detail_temlate, req.getSession());
+                            new BookDetailResponseBody(book_detail_template, post_user_detail, req.getSession());
                     Gson gson = new Gson();
                     String response_json = gson.toJson(responseBody);
 
@@ -81,11 +77,10 @@ public class BookDetail extends HttpServlet {
 class BookDetailResponseBody extends ResponseBody {
     String book_detail, user_info;
 
-    public BookDetailResponseBody(String book_detail, String user_info, HttpSession session) {
+    public BookDetailResponseBody(String book_detail, String post_user_info, HttpSession session) {
         super(session);
+        this.user_info = post_user_info;
         this.book_detail = book_detail;
-        this.user_info = user_info;
-        curr_user = (String) session.getAttribute("curr_user");
     }
 
 

@@ -25,8 +25,8 @@
     function inflate_data(data) {
         var json_obj = JSON.parse(data);
         inflate_book_info(json_obj['book_detail']);
-        inflate_post_user_info(json_obj['user_info'])
-
+        inflate_post_user_info(json_obj['user_info']);
+        update_login_state(json_obj['curr_user']);
     }
 
     $(function () {
@@ -42,8 +42,18 @@
 
             <!-- -------------左部标题--------------- -->
             <div class="LeftNav">
-                <a href="http://127.0.0.1:8080/register">注册</a>/<a href="http://127.0.0.1:8080/login">登录</a><a
-                    href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
+                <div id="login_state">
+                    <a href="http://127.0.0.1:8080/register">注册</a>/<a href="http://127.0.0.1:8080/login">登录</a>
+                </div>
+                <script>
+                    function update_login_state(curr_user) {
+                        if (curr_user !== "" && curr_user !== undefined) {
+                            $("#login_state").replaceWith($("<div><a href=\"http://127.0.0.1:8080/user_info\">" +
+                                "当前用户：" + curr_user + "<\a></div>"));
+                        }
+
+                    }
+                </script>
             </div>
 
             <!-- -------------右部标题--------------- -->

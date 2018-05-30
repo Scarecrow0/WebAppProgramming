@@ -70,18 +70,26 @@
                     <div class="right six columns">
                         <div class="clear"></div>
                         <font size="2">
-                            <div id="login_state" class="login">欢迎，请
-                                <a href="http://127.0.0.1:8080/login">
-                                    <font size="4"> <strong>登录</strong> </font>
-                                </a> 或
-                                <a href="http://127.0.0.1:8080/register">
-                                    <font size="4"> <strong>注册</strong> </font>
-                                </a>
+                            <div id="login_display">
+                                <div id="login_state" class="login">欢迎，请
+
+                                    <a href="http://127.0.0.1:8080/login">
+                                        <font size="4"> <strong>登录</strong> </font>
+                                    </a> 或
+                                    <a href="http://127.0.0.1:8080/register">
+                                        <font size="4"> <strong>注册</strong> </font>
+                                    </a>
+                                </div>
+
                             </div>
 
                             <script>
-                                function switch_to_login_state(username) {
-                                    $("#login_state").text("当前用户：" + username);
+                                function switch_to_login_state(curr_user) {
+                                    if (curr_user !== "") {
+                                        var login_state = $("#login_display");
+                                        login_state.replaceWith($("<a href=\"http://127.0.0.1:8080/user_info\">" +
+                                            "当前用户：" + curr_user + "<\a>"));
+                                    }
                                 }
                             </script>
                         </font>
@@ -161,7 +169,6 @@
     </div>
 </div>
 <!-- END MAIN CONTENT -->
-
 
 
 </body>

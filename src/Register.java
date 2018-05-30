@@ -23,7 +23,8 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username"),
-                password = req.getParameter("password");
+                password = req.getParameter("password"),
+                phone_number = req.getParameter("phone");
 
         HttpSession session = req.getSession();
         if (session.isNew())
@@ -42,7 +43,8 @@ public class Register extends HttpServlet {
                 return;
             }
 
-            DBAction.getInstance().doInsert(String.format("INSERT users VALUES (\'%s\', \'%s\');", username, password));
+            DBAction.getInstance().doInsert(String.format("INSERT users VALUES (\'%s\', \'%s\', \'%s\');",
+                    username, password, phone_number));
             outputStream.write("ok".getBytes());
             outputStream.close();
 

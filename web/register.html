@@ -58,6 +58,13 @@
                             <b>*</b>
                         </div>
 
+                        <!-- 用户名 -->
+                        <div class="item">
+                            <label contenteditable="false" class="rgister-label">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：</label>
+                            <input id="phone_number_input" name="phone_number_input" type="text" class="text"/>
+                            <b>*</b>
+                        </div>
+
                         <!-- 密码 -->
                         <div class="item">
                             <label contenteditable="false" class="rgister-label">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
@@ -92,8 +99,9 @@
                             var username = $("#username_input").val();
                             var password = $("#password_first").val();
                             var password_comf = $("#password_second").val();
+                            var phone_number = $("#phone_number_input").val();
 
-                            if (username === "" || password === "") {
+                            if (username === "" || password === "" || phone_number === "") {
                                 alert("用户名密码不能为空");
                                 return;
                             }
@@ -103,7 +111,8 @@
                             } else {
                                 form = {
                                     "username": username,
-                                    "password": password
+                                    "password": password,
+                                    "phone": phone_number
                                 };
                                 $.post("http://127.0.0.1:8080/register", form, register_call_back)
                             }
