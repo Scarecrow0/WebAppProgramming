@@ -30,7 +30,13 @@ public class UserCenter extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        String curr_user = (String) req.getSession().getAttribute("curr_user");
+        HttpSession session = req.getSession();
+        String curr_user;
+        if (session.isNew())
+            curr_user = "";
+        else
+            curr_user = (String) req.getSession().getAttribute("curr_user");
+
         try {
             switch (action) {
                 case "show":
@@ -58,7 +64,7 @@ public class UserCenter extends HttpServlet {
                     }
 
                     UserCenterResponsBody responsBody
-                            = new UserCenterResponsBody(req.getSession(), infos.toArray(), phone_number);
+                            = new UserCenterResponsBody(req.getSession(), infos.toArray(), phone_number, curr_user);
                     Gson gson = new Gson();
                     String result = gson.toJson(responsBody);
                     System.out.println(result);
@@ -98,9 +104,10 @@ class UserCenterResponsBody extends ResponseBody {
     Object[] brought_infos;
     String phone_number;
 
-    public UserCenterResponsBody(HttpSession session, Object[] infos, String phone_number) {
+    public UserCenterResponsBody(HttpSession session, Object[] infos, String phone_number, String curr_user) {
         super(session);
         this.phone_number = phone_number;
+        this.curr_user = curr_user;
         brought_infos = infos;
     }
 }

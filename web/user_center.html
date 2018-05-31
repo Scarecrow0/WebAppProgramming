@@ -7,6 +7,9 @@
     <link href="styles/common.css" rel="stylesheet" type="text/css"/>
     <link href="Threelinkage/linkage.css" rel="stylesheet" type="text/css"/>
     <link href="styles/style_detail.css" rel="stylesheet" type="text/css"/>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700,500,300,400italic,300italic'
+          rel='stylesheet'
+          type='text/css'>
     <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
     <script src="js/jquery.SuperSlide.2.1.1.js" type="text/javascript"></script>
     <script src="js/common_js.js" type="text/javascript"></script>
@@ -50,7 +53,6 @@
                             window.localStorage.setItem("is_login", true);
                             $("#login_state").replaceWith($("<div><a href=\"http://127.0.0.1:8080/user_center\">" +
                                 "当前用户：" + curr_user + "<\a></div>"));
-
                             set_user(curr_user)
                         }
 

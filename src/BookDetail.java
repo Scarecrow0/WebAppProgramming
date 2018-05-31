@@ -66,7 +66,7 @@ public class BookDetail extends HttpServlet {
                     DBAction.getInstance()
                             .doInsert("update books set salestate='sold' where book_id = " + book_id);
                     DBAction.getInstance()
-                            .doInsert(String.format("update sell_relation set buy_user=%s where book_id=%d",
+                            .doInsert(String.format("update sell_relation set buy_user='%s' where book_id=%d",
                                     curr_user, book_id));
                     resp.getOutputStream().write("ok".getBytes());
                     resp.getOutputStream().close();

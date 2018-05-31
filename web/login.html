@@ -2,6 +2,10 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700,500,300,400italic,300italic'
+          rel='stylesheet'
+          type='text/css'>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="styles/css.css" rel="stylesheet" type="text/css"/>
     <link href="styles/common.css" rel="stylesheet" tyle="text/css"/>
@@ -72,6 +76,7 @@
                         return;
                     }
                     var form = {
+                        "action": "login",
                         "username": username.valueOf(),
                         "password": password.valueOf()
                     };

@@ -22,24 +22,42 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username"),
-                password = req.getParameter("password");
-        System.out.println(username);
-        System.out.println(password);
+
+        OutputStream outputStream = resp.getOutputStream();
+        String action = req.getParameter("action");
         try {
-            OutputStream outputStream = resp.getOutputStream();
-            ResultSet resultSet = DBAction.getInstance()
-                    .doQuery(String.format("select * from users where username=\'%s\'and password=\'%s\';",
-                            username, password));
-            resultSet.next();
-            if (resultSet.isLast()) {
-                HttpSession session = req.getSession();
-                session.setAttribute("curr_user", username);
-                outputStream.write("ok".getBytes());
-            } else {
-                outputStream.write("failed".getBytes());
+            switch (action) {
+                case "login":
+                    String username = req.getParameter("username"),
+                            password = req.getParameter("password");
+                    System.out.println(username);
+                    System.out.println(password);
+
+                    ResultSet resultSet = DBAction.getInstance()
+                            .doQuery(String.format("select * from users where username=\'%s\'and password=\'%s\';",
+                                    username, password));
+                    resultSet.next();
+                    if (resultSet.isLast()) {
+                        HttpSession session = req.getSession();
+                        session.setAttribute("curr_user", username);
+                        outputStream.write("ok".getBytes());
+                    } else {
+                        outputStream.write("failed".getBytes());
+                    }
+                    outputStream.close();
+                    break;
+                case "look_up":
+                    HttpSession session = req.getSession();
+                    if (session.isNew()) {
+                        outputStream.write("".getBytes());
+                    } else {
+                        String curr_user = (String) session.getAttribute("curr_user");
+                        outputStream.write(curr_user.getBytes());
+                    }
+                    outputStream.close();
+                    break;
+
             }
-            outputStream.close();
 
         } catch (Exception ee) {
             System.out.println("error in register");
