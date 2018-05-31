@@ -41,7 +41,7 @@ public class BookDetail extends HttpServlet {
                     String book_detail_template = ResponseBody.fetchTemplate("book_detail");
                     book_detail_template =
                             String.format(book_detail_template,
-                                    "book" + book.book_id, book.book_id + "", book.book_name, book.price, book.comment_info);
+                                    "book" + book.book_id, book.book_id + "", book.book_name, book.price, book.long_comment);
 
                     String post_user_detail = ResponseBody.fetchTemplate("post_user_detail");
                     resultSet = DBAction.getInstance()
@@ -62,7 +62,14 @@ public class BookDetail extends HttpServlet {
 
                     break;
                 case "buy":
-                    String curr_user = (String) req.getSession().getAttribute("curr_user");
+                    HttpSession session = req.getSession();
+
+                    String curr_user = (String) session.getAttribute("curr_user");
+                    if (curr_user == null) {
+                        resp.getOutputStream().write("no".getBytes());
+                        resp.getOutputStream().close();
+                        break;
+                    }
                     DBAction.getInstance()
                             .doInsert("update books set salestate='sold' where book_id = " + book_id);
                     DBAction.getInstance()

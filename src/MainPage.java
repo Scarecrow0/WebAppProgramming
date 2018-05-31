@@ -67,7 +67,7 @@ public class MainPage extends HttpServlet {
 
 
 class Book {
-    String book_name, status, date, comment_info;
+    String book_name, status, date, comment_info, long_comment;
     int book_id;
     float price;
 
@@ -78,6 +78,7 @@ class Book {
         price = resultSet.getFloat(4);
         date = resultSet.getString(5);
         comment_info = resultSet.getString(6);
+        long_comment = resultSet.getString(7);
     }
 }
 

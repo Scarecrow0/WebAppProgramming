@@ -31,19 +31,17 @@
 
     <script>
         function buy_action() {
-            if (window.localStorage.getItem("is_login")) {
-                var form = {
-                    "action": "buy",
-                    "book_id": $("#book_id").text()
-                };
-                $.post("http://127.0.0.1:8080/book_detail", form, function () {
+            var form = {
+                "action": "buy",
+                "book_id": $("#book_id").text()
+            };
+            $.post("http://127.0.0.1:8080/book_detail", form, function (data) {
+                if (data === 'ok')
                     alert("购买成功");
-                });
-            } else {
-                alert("请先登录");
-            }
-
-
+                else {
+                    alert("请先登录");
+                }
+            });
         }
 
 
